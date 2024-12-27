@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: linear-gradient(63deg, #151619 10%, #18b0ec 100%);
+  font-family: monospace;
+  height: 100vh;
+}
+
+form {
+  align-content: center;
+  background-color: #2d2c3b;
+  width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+label {
+  display: block;
+  color: white;
+  white-space: nowrap;
+}
+input,
+select,
+textarea,
+button {
+  width: 300px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 12px;
+  outline: none;
+  border-width: 1px;
+  font-family: inherit;
+}
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+button:hover {
+  background-color: #67f72a;
+  transition: 1s all;
+}
+.container {
+  height: 100%;
+  display: flex;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  flex-direction: column;
+=======
+>>>>>>> 0b262331e15618efd570bc0889617ef631a4a130
+=======
+>>>>>>> hosein
+  justify-content: center;
+  align-items: center;
+}
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.cancell-btn:hover {
+  background-color: #f73131;
+}
+.exit-btn {
+  margin-bottom: 20px;
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+  background-color: #ff4d4d;
+  color: white;
+  cursor: pointer;
+}
+
+.exit-btn:hover {
+  background-color: #cc0000;
+=======
+=======
+>>>>>>> hosein
+  
+  background-color: #ff4d4d; 
+  color: white;
+  cursor: pointer; 
+
+}
+
+.exit-btn:hover {
+  background-color: #cc0000; 
+<<<<<<< HEAD
+>>>>>>> 0b262331e15618efd570bc0889617ef631a4a130
+=======
+>>>>>>> hosein
+}
+
+.center-text {
+  text-align: center;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  color: white;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #d0d0d0;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f4f4f4;
+}
+.actions-wrapper {
+  margin-top: 20px;
+}
+=======
+  color: white; 
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+>>>>>>> 0b262331e15618efd570bc0889617ef631a4a130
+=======
+  color: white; 
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+>>>>>>> hosein
