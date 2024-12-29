@@ -1,5 +1,8 @@
 ﻿
 
+using AppDomainAppService.Card;
+using AppDomainAppService.Transaction;
+using AppDomainAppService.User;
 using AppDomainCore.Contract.Card;
 using AppDomainCore.Contract.Transaction;
 using AppDomainCore.Contract.User;
@@ -11,9 +14,9 @@ using Colors.Net;
 using Colors.Net.StringColorExtensions;
 using ConsoleTables;
 
-ICardService cardService = new CardService();
-ITransactionService transactionService = new TransactionService();
-IUserService userService = new UserService();
+ICardAppSerevice cardService = new CardAppService();
+ITransactionAppService transactionService = new TransactionAppService();
+IUserAppService userService = new UserAppService();
 
 bool loggedIn = false;
 string cardNumber = "";

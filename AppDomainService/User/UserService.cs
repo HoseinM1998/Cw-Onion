@@ -1,4 +1,5 @@
 ﻿using AppDomainCore.Contract.User;
+using AppDomainCore.Dto;
 using Repository.User;
 using System;
 using System.Collections.Generic;
@@ -17,36 +18,43 @@ namespace AppDomainService.User
             _userRepository = new UserRepository();
         }
 
-        public string GenerateVerificationCode(int userId, string fullName)
+        public void GenerateAndSaveVerificationCode(int userId, string fullName, int verificationCode, DateTime expirationTime)
         {
             var existingVerification = _userRepository.GetVerificationDataById(userId);
 
             if (existingVerification != null && existingVerification.DateVerificationCode > DateTime.Now)
             {
-                return "Code Already Sent";
+                throw new Exception("Code Already Sent");
             }
 
-            var random = new Random();
-            int verificationCode = random.Next(10000, 99999);
-            DateTime expirationTime = DateTime.Now.AddMinutes(5);
             _userRepository.GenerateAndSaveVerificationCode(userId, fullName, verificationCode, expirationTime);
-            return $"Code Send";
+        }
+
+        public VerificationDto GetVerificationDataById(int userId)
+        {
+            return _userRepository.GetVerificationDataById(userId);
         }
 
         public bool ValidateVerificationCode(int userId, string fullName, int verificationCode)
         {
             var verificationDto = _userRepository.GetVerificationDataById(userId);
-            if (verificationDto != null &&
-                verificationDto.FullName == fullName &&
-                verificationDto.VerificationCode == verificationCode)
+
+            if (verificationDto == null)
             {
-                if (verificationDto.DateVerificationCode > DateTime.Now)
-                {
-                    verificationDto.DateVerificationCode = DateTime.Now.AddMinutes(-1);
-                    _userRepository.SaveVerificationData(verificationDto);
-                    return true;
-                }
+                return false;
             }
+
+            bool isCodeValid = verificationDto.FullName == fullName &&
+                               verificationDto.VerificationCode == verificationCode &&
+                               verificationDto.DateVerificationCode > DateTime.Now;
+
+            if (isCodeValid)
+            {
+                verificationDto.DateVerificationCode = DateTime.Now.AddMinutes(-1);
+                _userRepository.SaveVerificationData(verificationDto);
+                return true;
+            }
+
             return false;
         }
     }

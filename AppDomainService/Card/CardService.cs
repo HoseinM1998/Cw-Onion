@@ -16,70 +16,92 @@ namespace AppDomainService.Card
             _cardRepository = new CardRepository();
         }
 
-        public bool Login(string cardNumber, string password)
+        public bool PasswordIsValid(string cardNumber, string password)
         {
-            var tryCount = _cardRepository.GetWrongPasswordTry(cardNumber);
             var card = _cardRepository.GetCard(cardNumber);
             if (card == null)
             {
-                throw new Exception("Card not found");
+                throw new Exception("Card Not Found");
             }
-            if (!card.IsActive)
-            {
-                throw new Exception("Account Blocked");
-            }
+            return _cardRepository.PasswordIsValid(cardNumber, password);
+        }
 
-            if (tryCount > 3)
-            {
-                _cardRepository.BlockCard(cardNumber);
-                return false;
-            }
+        public void SetWrongPasswordTry(string cardNumber)
+        {
+            _cardRepository.SetWrongPasswordTry(cardNumber);
+        }
 
-            var passwordIsValid = _cardRepository.PasswordIsValid(cardNumber, password);
+        public int GetWrongPasswordTry(string cardNumber)
+        {
+            return _cardRepository.GetWrongPasswordTry(cardNumber);
+        }
 
-            if (passwordIsValid == false)
-            {
-                _cardRepository.SetWrongPasswordTry(cardNumber);
-                return false;
-            }
-
+        public void ClearWrongPasswordTry(string cardNumber)
+        {
             _cardRepository.ClearWrongPasswordTry(cardNumber);
-            return true;
+        }
+
+        public AppDomainCore.Entities.Card GetCard(string cardNumber)
+        {
+            var card = _cardRepository.GetCard(cardNumber);
+            if (card == null)
+            {
+                throw new Exception("Card Not Found");
+            }
+            return card;
+        }
+
+        public void Withdraw(string cardNumber, float amount)
+        {
+            if (amount <= 0)
+            {
+                throw new Exception("Amount Not Zero");
+            }
+
+            var balance = _cardRepository.GetCardBalance(cardNumber);
+            if (balance < amount)
+            {
+                throw new Exception("Not Enough Inventory");
+            }
+
+            _cardRepository.Withdraw(cardNumber, amount);
+        }
+
+        public void Deposit(string cardNumber, float amount)
+        {
+            if (amount <= 0)
+            {
+                throw new Exception("Amount Not Zero");
+            }
+
+            _cardRepository.Deposit(cardNumber, amount);
+        }
+
+        public void BlockCard(string cardNumber)
+        {
+            var card = _cardRepository.GetCard(cardNumber);
+            if (card == null)
+            {
+                throw new Exception("Card Not Found");
+            }
+
+            _cardRepository.BlockCard(cardNumber);
         }
 
         public float GetCardBalance(string cardNumber)
         {
-            var balance = _cardRepository.GetCardBalance(cardNumber);
-            if (balance == 0)
-            {
-                throw new Exception("Balance is Zero");
-            }
-            return balance;
+            return _cardRepository.GetCardBalance(cardNumber);
         }
 
-        public bool GetCardOnline(string cardNumber)
+        public string Changepassword(string cardNumber, string newPass)
         {
-            var card = _cardRepository.GetCard(cardNumber);
-            if (card == null)
-            {
-                throw new Exception("Not Found");
-            }
-            return true;
-        }
-
-        public bool ChangePassword(string cardNumber, string newPass)
-        {
-            if (string.IsNullOrEmpty(newPass))
-            {
-                throw new Exception("Password cannot be empty");
-            }
-
-            if (newPass.Length != 4)
+            if (newPass == null && newPass.Length != 4)
             {
                 throw new Exception("Password Must Exactly 4 Digits");
             }
+
             _cardRepository.Changepassword(cardNumber, newPass);
-            return true;
+            return "Password Changed Successfully";
         }
 
         public AppDomainCore.Entities.Card GetCardByCardNumber(string cardNumber)

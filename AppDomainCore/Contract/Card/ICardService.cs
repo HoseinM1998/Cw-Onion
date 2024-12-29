@@ -8,14 +8,16 @@ namespace AppDomainCore.Contract.Card
 {
     public interface ICardService
     {
-        public bool Login(string cardNumber, string password);
-
+        bool PasswordIsValid(string cardNumber, string password);
+        void SetWrongPasswordTry(string cardNumber);
+        int GetWrongPasswordTry(string cardNumber);
+        void ClearWrongPasswordTry(string cardNumber);
+        public Entities.Card GetCard(string cardNumber);
+        void Withdraw(string cardNumber, float amount);
+        void Deposit(string cardNumber, float amount);
+        public void BlockCard(string cardNumber);
         public float GetCardBalance(string cardNumber);
-
-        public bool GetCardOnline(string cardNumber);
-
-        public bool ChangePassword(string cardNumber, string newPass);
-
+        string Changepassword(string cardNumber, string newPass);
         public Entities.Card GetCardByCardNumber(string cardNumber);
     }
 }

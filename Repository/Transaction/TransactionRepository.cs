@@ -22,6 +22,10 @@ namespace Repository.Transaction
 
         public void AddTransaction(Transactiion transaction)
         {
+            if (transaction == null)
+            {
+                throw new ArgumentNullException(nameof(transaction), "Transaction cannot be null");
+            }
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
         }

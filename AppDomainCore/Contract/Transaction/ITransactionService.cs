@@ -1,4 +1,5 @@
 ﻿using AppDomainCore.Dto;
+using AppDomainCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace AppDomainCore.Contract.Transaction
 {
     public interface ITransactionService
     {
-        public bool TransferFunds(string sourceCardNumber, string destinationCardNumber, float amount);
-        public List<GetTransactionsDto> GetTransactionsByCardNumber(string cardNumber);
-        public float GetTotalTransactionsForToday(string cardNumber);
-        public float CalculateFee(string cardNumber, float amount);
+        public void AddTransaction(Transactiion transaction);
+        float DailyWithdrawal(string cardNumber);
+        public List<GetTransactionsDto> GetListOfTransactions(string cardNumber);
+
+        public void UpdateTransactionFee(string cardNumber, float fee);
     }
 }
