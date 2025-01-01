@@ -30,20 +30,17 @@ namespace AppDomainAppService.User
 
             return "Code Sent";
         }
-
         public bool ValidateVerificationCode(int userId, string fullName, int verificationCode)
         {
             var verificationDto = _userService.GetVerificationDataById(userId);
-
             if (verificationDto != null &&
                 verificationDto.FullName == fullName &&
-                verificationDto.VerificationCode == verificationCode &&
-                verificationDto.DateVerificationCode > DateTime.Now)
+                verificationDto.VerificationCode == verificationCode)
             {
-                verificationDto.DateVerificationCode = DateTime.Now.AddMinutes(-1);
+                _userService.ValidateVerificationCode(userId, fullName, verificationCode);
                 return true;
-            }
 
+            }
             return false;
         }
     }

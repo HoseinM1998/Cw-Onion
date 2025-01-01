@@ -11,6 +11,8 @@ namespace AppDomainCore.Contract.User
     {
         public void GenerateAndSaveVerificationCode(int userId, string fullName, int verificationCode, DateTime expirationTime);
         public VerificationDto GetVerificationDataById(int userId);
+        public void SaveVerificationData(VerificationDto verificationDto);
+
 
     }
 }

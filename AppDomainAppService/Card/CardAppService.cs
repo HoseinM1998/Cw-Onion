@@ -1,5 +1,6 @@
 ﻿using AppDomainCore.Contract.Card;
 using AppDomainService.Card;
+using Configuration.BankDb;
 
 namespace AppDomainAppService.Card
 {
@@ -39,6 +40,8 @@ namespace AppDomainAppService.Card
             }
 
             _cardService.ClearWrongPasswordTry(cardNumber);
+            InMemory.CurentUser = cardNumber;
+
             return true;
         }
 

@@ -1,0 +1,36 @@
+﻿@model AppDomainCore.Entities.Card
+
+<h2>Profile</h2>
+<p>Card Number: @Model.CardNumber</p>
+
+<button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#balanceModal">Show Balance</button>
+<button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#changePass">Change Password</button>
+
+<div class="modal" id="balanceModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal">
+                <h5 class="modal-title">Your Balance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Balance :@Model.Balance$</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="changePass" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Card/ChangePassword">
+                <div class="modal-body">
+                    <input type="password" class="form-control" name="newPassword" placeholder="New Password"/>
+                </div>
+                <div class="modal">
+                    <button type="submit" class="btn btn-dark">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

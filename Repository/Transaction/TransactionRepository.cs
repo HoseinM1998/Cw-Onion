@@ -8,6 +8,7 @@ using AppDomainCore.Dto;
 using AppDomainCore.Entities;
 using AppDomainCore.Contract;
 using Configuration.BankDb;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository.Transaction
 {
@@ -34,7 +35,7 @@ namespace Repository.Transaction
         {
             return _context.Transactions
                 .Where(x => x.SourceCard.CardNumber == cardNumber || x.DestinationCard.CardNumber == cardNumber)
-                .OrderBy(x => x.TransactionDate)
+                .OrderByDescending(x => x.TransactionDate)
                 .Select(x => new GetTransactionsDto
                 {
                     SourceCardNumber = x.SourceCard.CardNumber,

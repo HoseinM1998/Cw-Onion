@@ -1,8 +1,34 @@
-﻿@{
+﻿@using Configuration.BankDb
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Profile</h2>
+@if (InMemory.CurentUser != null)
+{
+    <a href="@Url.Action("Profile", "Card")" class="btn btn-dark">View Profile</a>
+}
+else
+{
+    <a href="@Url.Action("Login", "Card")" class="btn btn-secondary">Login</a>
+}
+
+<h2>Transaction List</h2>
+@if (InMemory.CurentUser != null)
+{
+    <a href="@Url.Action("List", "Transaction")" class="btn btn-dark">View Transaction List</a>
+}
+else
+{
+    <a href="@Url.Action("Login", "Card")" class="btn btn-secondary">Login</a>
+}
+
+<h2>Transfer</h2>
+@if (InMemory.CurentUser != null)
+{
+    <a href="@Url.Action("Transfer", "Transaction")" class="btn btn-dark">Transfer</a>
+}
+else
+{
+    <a href="@Url.Action("Login", "Card")" class="btn btn-secondary">Login</a>
+}

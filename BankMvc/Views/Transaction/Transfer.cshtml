@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AppDomainCore.Entities.Card
+
+<h2 class="text-center my-4">Transfer</h2>
+
+<div class="container my-5">
+    <form method="post" action="/Transaction/Transfer">
+        <input type="number" class="form-control" name="Amount"  placeholder="Amount" />
+        <input type="text" class="form-control" name="RecipientCardNumber" placeholder="Recipient Card Number" />
+        <button type="submit" class="btn btn-dark mt-3">Transfer</button>
+    </form>
+
+    @if (Model?.CardNumber != null)
+    {
+        <div style="background-color: gray; padding: 15px; border-radius: 5px;">
+            <p>Full Name: @Model.User.FullName</p>
+            <p>Holder Name: @Model.HolderName</p>
+            <p>Amount: @ViewBag.TransferAmount$</p>
+        </div>
+        <button type="button" class="btn btn-dark mt-3" data-bs-toggle="modal" data-bs-target="#verifi">Enter Verification Code</button>
+        <div class="modal" id="verifi"  >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="/Transaction/ConfirmTransfer">
+                        <input type="text" class="form-control" name="VerificationCode"  placeholder="Verification Code" />
+                        <input type="hidden" name="RecipientCardNumber" value="@Model.CardNumber" />
+                        <input type="hidden" name="Amount" value="@ViewBag.TransferAmount" />
+                        <button type="submit" class="btn btn-dark">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
