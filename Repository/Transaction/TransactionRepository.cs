@@ -16,9 +16,9 @@ namespace Repository.Transaction
     {
         private readonly BankDbContext _context;
 
-        public TransactionRepository()
+        public TransactionRepository(BankDbContext context)
         {
-            _context = new BankDbContext();
+            _context = context;
         }
 
         public void AddTransaction(Transactiion transaction)

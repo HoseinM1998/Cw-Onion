@@ -13,10 +13,18 @@ namespace BankMvc.Controllers
 {
     public class TransactionController : Controller
     {
-        ICardAppSerevice cardService = new CardAppService();
-        ITransactionAppService transactionService = new TransactionAppService();
-        IUserAppService userService = new UserAppService();
+        private readonly ICardAppSerevice cardService;
+        private readonly ITransactionAppService transactionService;
+        private readonly IUserAppService userService;
         string cardNumber = InMemory.CurentUser;
+
+        public TransactionController(ICardAppSerevice _cardService, ITransactionAppService _transactionService, IUserAppService _userService)
+        {
+            cardService = _cardService;
+            transactionService = _transactionService;
+            userService = _userService;
+        }
+
 
         public ActionResult List()
         {

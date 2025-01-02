@@ -1,4 +1,5 @@
-﻿using AppDomainCore.Contract.Transaction;
+﻿using AppDomainCore.Contract.Card;
+using AppDomainCore.Contract.Transaction;
 using AppDomainCore.Dto;
 using AppDomainCore.Entities;
 using AppDomainService.Card;
@@ -9,13 +10,13 @@ namespace AppDomainAppService.Transaction
 {
     public class TransactionAppService : ITransactionAppService
     {
-        private readonly CardService _cardService;
-        private readonly TransactionService _transactionService;
+        private readonly ICardService _cardService;
+        private readonly ITransactionService _transactionService;
 
-        public TransactionAppService()
+        public TransactionAppService(ICardService cardService, ITransactionService transactionService)
         {
-            _transactionService = new TransactionService();
-            _cardService = new CardService();
+            _cardService = cardService;
+            _transactionService = transactionService;
         }
         public bool TransferFunds(string sourceCardNumber, string destinationCardNumber, float amount)
         {

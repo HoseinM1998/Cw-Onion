@@ -7,9 +7,9 @@ namespace AppDomainAppService.Card
     public class CardAppService : ICardAppSerevice
     {
         private readonly ICardService _cardService;
-        public CardAppService()
+        public CardAppService(ICardService cardService)
         {
-            _cardService = new CardService();
+            _cardService = cardService;
         }
 
         public bool Login(string cardNumber, string password)

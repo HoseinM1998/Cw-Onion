@@ -8,9 +8,9 @@ namespace Repository.Card
     {
         private readonly BankDbContext _context;
 
-        public CardRepository()
+        public CardRepository(BankDbContext context)
         {
-            _context = new BankDbContext();
+            _context = context;
         }
 
         public bool PasswordIsValid(string cardNumber, string password)

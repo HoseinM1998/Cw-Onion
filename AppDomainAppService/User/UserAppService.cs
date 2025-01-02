@@ -5,11 +5,11 @@ namespace AppDomainAppService.User
 {
     public class UserAppService : IUserAppService
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserAppService()
+        public UserAppService(IUserService userService)
         {
-            _userService = new UserService();
+            _userService = userService;
         }
 
 

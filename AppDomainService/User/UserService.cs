@@ -11,11 +11,11 @@ namespace AppDomainService.User
 {
     public class UserService : IUserService
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUsreRepository _userRepository;
 
-        public UserService()
+        public UserService(IUsreRepository userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
         }
 
         public void GenerateAndSaveVerificationCode(int userId, string fullName, int verificationCode, DateTime expirationTime)

@@ -9,7 +9,11 @@ namespace BankMvc.Controllers
 {
     public class CardController : Controller
     {
-        ICardAppSerevice cardService = new CardAppService();
+        private readonly ICardAppSerevice cardService;
+        public CardController(ICardAppSerevice _cardService)
+        {
+            cardService = _cardService;
+        }
 
         public IActionResult Login()
         {

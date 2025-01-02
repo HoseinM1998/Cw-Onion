@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppDomainCore.Contract.Card;
 using Repository.Card;
 using Repository.Transaction;
 
@@ -13,13 +14,13 @@ namespace AppDomainService.Transaction
 {
     public class TransactionService : ITransactionService
     {
-        private readonly CardRepository _cardRepository;
-        private readonly TransactionRepository _transactionRepository;
+        private readonly ICardRepository _cardRepository;
+        private readonly ITransactionRepository _transactionRepository;
 
-        public TransactionService()
+        public TransactionService(ICardRepository cardRepository, ITransactionRepository transactionRepository)
         {
-            _transactionRepository = new TransactionRepository();
-            _cardRepository = new CardRepository();
+            _cardRepository = cardRepository;
+            _transactionRepository =  transactionRepository;
         }
         public void AddTransaction(Transactiion transaction)
         {
